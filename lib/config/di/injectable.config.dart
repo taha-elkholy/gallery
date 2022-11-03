@@ -20,11 +20,12 @@ import '../../features/auth/data/repository/auth_repository_impl.dart' as _i9;
 import '../../features/auth/domain/repositories/auth_repository.dart' as _i8;
 import '../../features/auth/domain/usecases/get_token_use_case.dart' as _i10;
 import '../../features/auth/domain/usecases/login_use_case.dart' as _i11;
+import '../../features/auth/domain/usecases/logout_use_case.dart' as _i12;
 import '../../features/auth/presentation/cubit/auth_cubit/auth_cubit.dart'
-    as _i12;
-import 'module/dio.dart' as _i13;
+    as _i13;
+import 'module/dio.dart' as _i14;
 import 'module/shared_preferences.dart'
-    as _i14; // ignore_for_file: unnecessary_lambdas
+    as _i15; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -58,13 +59,16 @@ Future<_i1.GetIt> $initGetIt(
       () => _i10.GetTokenUseCase(get<_i8.AuthRepository>()));
   gh.factory<_i11.LoginUseCase>(
       () => _i11.LoginUseCase(get<_i8.AuthRepository>()));
-  gh.factory<_i12.AuthCubit>(() => _i12.AuthCubit(
+  gh.factory<_i12.LogoutUseCase>(
+      () => _i12.LogoutUseCase(get<_i8.AuthRepository>()));
+  gh.factory<_i13.AuthCubit>(() => _i13.AuthCubit(
         get<_i11.LoginUseCase>(),
         get<_i10.GetTokenUseCase>(),
+        get<_i12.LogoutUseCase>(),
       ));
   return get;
 }
 
-class _$AppDioInject extends _i13.AppDioInject {}
+class _$AppDioInject extends _i14.AppDioInject {}
 
-class _$InjectionModule extends _i14.InjectionModule {}
+class _$InjectionModule extends _i15.InjectionModule {}

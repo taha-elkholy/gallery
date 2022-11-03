@@ -3,16 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery/core/utils/app_strings.dart';
 import 'package:gallery/features/auth/domain/usecases/get_token_use_case.dart';
 import 'package:gallery/features/auth/domain/usecases/login_use_case.dart';
+import 'package:gallery/features/auth/domain/usecases/logout_use_case.dart';
 import 'package:gallery/features/auth/presentation/cubit/auth_cubit/auth_states.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class AuthCubit extends Cubit<AuthStates> {
   AuthCubit(
-    this._loginUseCase, this._getTokenUseCase,
+    this._loginUseCase,
+    this._getTokenUseCase,
+    this._logoutUseCase,
   ) : super(const AuthStates.initial());
 
   final LoginUseCase _loginUseCase;
+  final LogoutUseCase _logoutUseCase;
   final GetTokenUseCase _getTokenUseCase;
 
   Future<void> login({required LoginParam loginParam}) async {
@@ -26,6 +30,11 @@ class AuthCubit extends Cubit<AuthStates> {
         (user) => AuthStates.loaded(user: user),
       ),
     );
+  }
+
+  void logout() {
+    _logoutUseCase();
+    emit(const AuthStates.logout());
   }
 
   String? validateEmail({String? email}) {

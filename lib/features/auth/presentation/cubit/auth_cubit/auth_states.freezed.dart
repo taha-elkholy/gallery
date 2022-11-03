@@ -20,6 +20,7 @@ mixin _$AuthStates {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() logout,
     required TResult Function(User user) loaded,
     required TResult Function(String errorMessage) error,
   }) =>
@@ -28,6 +29,7 @@ mixin _$AuthStates {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? logout,
     TResult? Function(User user)? loaded,
     TResult? Function(String errorMessage)? error,
   }) =>
@@ -36,6 +38,7 @@ mixin _$AuthStates {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? logout,
     TResult Function(User user)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -45,6 +48,7 @@ mixin _$AuthStates {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthInitialState value) initial,
     required TResult Function(AuthLoadingState value) loading,
+    required TResult Function(AuthLogoutState value) logout,
     required TResult Function(AuthLoadedState value) loaded,
     required TResult Function(AuthErrorState value) error,
   }) =>
@@ -53,6 +57,7 @@ mixin _$AuthStates {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthInitialState value)? initial,
     TResult? Function(AuthLoadingState value)? loading,
+    TResult? Function(AuthLogoutState value)? logout,
     TResult? Function(AuthLoadedState value)? loaded,
     TResult? Function(AuthErrorState value)? error,
   }) =>
@@ -61,6 +66,7 @@ mixin _$AuthStates {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthInitialState value)? initial,
     TResult Function(AuthLoadingState value)? loading,
+    TResult Function(AuthLogoutState value)? logout,
     TResult Function(AuthLoadedState value)? loaded,
     TResult Function(AuthErrorState value)? error,
     required TResult orElse(),
@@ -126,6 +132,7 @@ class _$AuthInitialState implements AuthInitialState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() logout,
     required TResult Function(User user) loaded,
     required TResult Function(String errorMessage) error,
   }) {
@@ -137,6 +144,7 @@ class _$AuthInitialState implements AuthInitialState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? logout,
     TResult? Function(User user)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
@@ -148,6 +156,7 @@ class _$AuthInitialState implements AuthInitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? logout,
     TResult Function(User user)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -163,6 +172,7 @@ class _$AuthInitialState implements AuthInitialState {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthInitialState value) initial,
     required TResult Function(AuthLoadingState value) loading,
+    required TResult Function(AuthLogoutState value) logout,
     required TResult Function(AuthLoadedState value) loaded,
     required TResult Function(AuthErrorState value) error,
   }) {
@@ -174,6 +184,7 @@ class _$AuthInitialState implements AuthInitialState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthInitialState value)? initial,
     TResult? Function(AuthLoadingState value)? loading,
+    TResult? Function(AuthLogoutState value)? logout,
     TResult? Function(AuthLoadedState value)? loaded,
     TResult? Function(AuthErrorState value)? error,
   }) {
@@ -185,6 +196,7 @@ class _$AuthInitialState implements AuthInitialState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthInitialState value)? initial,
     TResult Function(AuthLoadingState value)? loading,
+    TResult Function(AuthLogoutState value)? logout,
     TResult Function(AuthLoadedState value)? loaded,
     TResult Function(AuthErrorState value)? error,
     required TResult orElse(),
@@ -240,6 +252,7 @@ class _$AuthLoadingState implements AuthLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() logout,
     required TResult Function(User user) loaded,
     required TResult Function(String errorMessage) error,
   }) {
@@ -251,6 +264,7 @@ class _$AuthLoadingState implements AuthLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? logout,
     TResult? Function(User user)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
@@ -262,6 +276,7 @@ class _$AuthLoadingState implements AuthLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? logout,
     TResult Function(User user)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -277,6 +292,7 @@ class _$AuthLoadingState implements AuthLoadingState {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthInitialState value) initial,
     required TResult Function(AuthLoadingState value) loading,
+    required TResult Function(AuthLogoutState value) logout,
     required TResult Function(AuthLoadedState value) loaded,
     required TResult Function(AuthErrorState value) error,
   }) {
@@ -288,6 +304,7 @@ class _$AuthLoadingState implements AuthLoadingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthInitialState value)? initial,
     TResult? Function(AuthLoadingState value)? loading,
+    TResult? Function(AuthLogoutState value)? logout,
     TResult? Function(AuthLoadedState value)? loaded,
     TResult? Function(AuthErrorState value)? error,
   }) {
@@ -299,6 +316,7 @@ class _$AuthLoadingState implements AuthLoadingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthInitialState value)? initial,
     TResult Function(AuthLoadingState value)? loading,
+    TResult Function(AuthLogoutState value)? logout,
     TResult Function(AuthLoadedState value)? loaded,
     TResult Function(AuthErrorState value)? error,
     required TResult orElse(),
@@ -312,6 +330,126 @@ class _$AuthLoadingState implements AuthLoadingState {
 
 abstract class AuthLoadingState implements AuthStates {
   const factory AuthLoadingState() = _$AuthLoadingState;
+}
+
+/// @nodoc
+abstract class _$$AuthLogoutStateCopyWith<$Res> {
+  factory _$$AuthLogoutStateCopyWith(
+          _$AuthLogoutState value, $Res Function(_$AuthLogoutState) then) =
+      __$$AuthLogoutStateCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AuthLogoutStateCopyWithImpl<$Res>
+    extends _$AuthStatesCopyWithImpl<$Res, _$AuthLogoutState>
+    implements _$$AuthLogoutStateCopyWith<$Res> {
+  __$$AuthLogoutStateCopyWithImpl(
+      _$AuthLogoutState _value, $Res Function(_$AuthLogoutState) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AuthLogoutState implements AuthLogoutState {
+  const _$AuthLogoutState();
+
+  @override
+  String toString() {
+    return 'AuthStates.logout()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AuthLogoutState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() logout,
+    required TResult Function(User user) loaded,
+    required TResult Function(String errorMessage) error,
+  }) {
+    return logout();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? logout,
+    TResult? Function(User user)? loaded,
+    TResult? Function(String errorMessage)? error,
+  }) {
+    return logout?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? logout,
+    TResult Function(User user)? loaded,
+    TResult Function(String errorMessage)? error,
+    required TResult orElse(),
+  }) {
+    if (logout != null) {
+      return logout();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthInitialState value) initial,
+    required TResult Function(AuthLoadingState value) loading,
+    required TResult Function(AuthLogoutState value) logout,
+    required TResult Function(AuthLoadedState value) loaded,
+    required TResult Function(AuthErrorState value) error,
+  }) {
+    return logout(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthInitialState value)? initial,
+    TResult? Function(AuthLoadingState value)? loading,
+    TResult? Function(AuthLogoutState value)? logout,
+    TResult? Function(AuthLoadedState value)? loaded,
+    TResult? Function(AuthErrorState value)? error,
+  }) {
+    return logout?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthInitialState value)? initial,
+    TResult Function(AuthLoadingState value)? loading,
+    TResult Function(AuthLogoutState value)? logout,
+    TResult Function(AuthLoadedState value)? loaded,
+    TResult Function(AuthErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (logout != null) {
+      return logout(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AuthLogoutState implements AuthStates {
+  const factory AuthLogoutState() = _$AuthLogoutState;
 }
 
 /// @nodoc
@@ -380,6 +518,7 @@ class _$AuthLoadedState implements AuthLoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() logout,
     required TResult Function(User user) loaded,
     required TResult Function(String errorMessage) error,
   }) {
@@ -391,6 +530,7 @@ class _$AuthLoadedState implements AuthLoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? logout,
     TResult? Function(User user)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
@@ -402,6 +542,7 @@ class _$AuthLoadedState implements AuthLoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? logout,
     TResult Function(User user)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -417,6 +558,7 @@ class _$AuthLoadedState implements AuthLoadedState {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthInitialState value) initial,
     required TResult Function(AuthLoadingState value) loading,
+    required TResult Function(AuthLogoutState value) logout,
     required TResult Function(AuthLoadedState value) loaded,
     required TResult Function(AuthErrorState value) error,
   }) {
@@ -428,6 +570,7 @@ class _$AuthLoadedState implements AuthLoadedState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthInitialState value)? initial,
     TResult? Function(AuthLoadingState value)? loading,
+    TResult? Function(AuthLogoutState value)? logout,
     TResult? Function(AuthLoadedState value)? loaded,
     TResult? Function(AuthErrorState value)? error,
   }) {
@@ -439,6 +582,7 @@ class _$AuthLoadedState implements AuthLoadedState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthInitialState value)? initial,
     TResult Function(AuthLoadingState value)? loading,
+    TResult Function(AuthLogoutState value)? logout,
     TResult Function(AuthLoadedState value)? loaded,
     TResult Function(AuthErrorState value)? error,
     required TResult orElse(),
@@ -526,6 +670,7 @@ class _$AuthErrorState implements AuthErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() logout,
     required TResult Function(User user) loaded,
     required TResult Function(String errorMessage) error,
   }) {
@@ -537,6 +682,7 @@ class _$AuthErrorState implements AuthErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? logout,
     TResult? Function(User user)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
@@ -548,6 +694,7 @@ class _$AuthErrorState implements AuthErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? logout,
     TResult Function(User user)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -563,6 +710,7 @@ class _$AuthErrorState implements AuthErrorState {
   TResult map<TResult extends Object?>({
     required TResult Function(AuthInitialState value) initial,
     required TResult Function(AuthLoadingState value) loading,
+    required TResult Function(AuthLogoutState value) logout,
     required TResult Function(AuthLoadedState value) loaded,
     required TResult Function(AuthErrorState value) error,
   }) {
@@ -574,6 +722,7 @@ class _$AuthErrorState implements AuthErrorState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthInitialState value)? initial,
     TResult? Function(AuthLoadingState value)? loading,
+    TResult? Function(AuthLogoutState value)? logout,
     TResult? Function(AuthLoadedState value)? loaded,
     TResult? Function(AuthErrorState value)? error,
   }) {
@@ -585,6 +734,7 @@ class _$AuthErrorState implements AuthErrorState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthInitialState value)? initial,
     TResult Function(AuthLoadingState value)? loading,
+    TResult Function(AuthLogoutState value)? logout,
     TResult Function(AuthLoadedState value)? loaded,
     TResult Function(AuthErrorState value)? error,
     required TResult orElse(),

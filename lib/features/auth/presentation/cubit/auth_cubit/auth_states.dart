@@ -9,6 +9,8 @@ class AuthStates with _$AuthStates {
 
   const factory AuthStates.loading() = AuthLoadingState;
 
+  const factory AuthStates.logout() = AuthLogoutState;
+
   const factory AuthStates.loaded({required User user}) = AuthLoadedState;
 
   const factory AuthStates.error({required String errorMessage}) =
