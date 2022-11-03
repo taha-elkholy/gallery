@@ -6,6 +6,7 @@ import 'package:gallery/features/auth/domain/usecases/login_use_case.dart';
 abstract class AuthRepository {
   Future<Either<AppFailure, User>> login({required LoginParam loginParam});
 
-  String? getToken();
-  Future<bool> removeToken();
+  User? getCurrentUser();
+
+  Future<bool> removeCurrentUser();
 }

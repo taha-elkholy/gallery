@@ -37,6 +37,11 @@ ThemeData appTheme() => ThemeData(
           fontSize: 16.sp,
           fontWeight: FontWeight.w600,
         ),
+        bodySmall: TextStyle(
+          color: AppColors.black,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w600,
+        ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: TextStyle(
@@ -70,5 +75,13 @@ ThemeData appTheme() => ThemeData(
         focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(22.r),
             borderSide: const BorderSide(color: Colors.red)),
+      ),
+      cardTheme: CardTheme(
+        elevation: 8,
+        shadowColor: AppColors.grey,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.r),
+        ),
       ),
     );

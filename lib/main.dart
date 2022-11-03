@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: appTheme(),
               onGenerateRoute: AppRouter.onGenerateRoute,
-              initialRoute: context.read<AuthCubit>().token != null
+              initialRoute: context.read<AuthCubit>().currentUser != null
                   ? AppRoutes.galleryPageRoute
                   : AppRoutes.initialPageRoute,
             );

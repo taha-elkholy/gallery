@@ -25,21 +25,27 @@ class AuthRepositoryImpl implements AuthRepository {
       final userModel =
           await _authRemoteDatasource.login(loginModel: loginParam.toModel);
 
-      await _authLocalDatasource.saveToken(token: userModel.token);
+      await _authLocalDatasource.saveCurrentUser(
+        currentUser: userModel,
+      );
 
-      return right(userModel.user.fromModel);
+      return right(userModel.fromModel);
     } on AppException catch (appException) {
       return left(returnAppFailure(appException));
     }
   }
 
   @override
-  String? getToken() {
-    return _authLocalDatasource.getToken();
+  User? getCurrentUser() {
+    final cachedCurrentUser = _authLocalDatasource.getCurrentUser();
+    if (cachedCurrentUser != null) {
+      return cachedCurrentUser.fromModel;
+    }
+    return null;
   }
 
   @override
-  Future<bool> removeToken() async {
-    return await _authLocalDatasource.deleteToken();
+  Future<bool> removeCurrentUser() async {
+    return await _authLocalDatasource.deleteCurrentUser();
   }
 }

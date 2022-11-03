@@ -9,7 +9,7 @@ class LogoutUseCase {
 
   Future<bool> call() {
     // we haven't logout end point now
-    // so we remove token from cache
-    return _repository.removeToken();
+    // so we remove current user from cache
+    return _repository.removeCurrentUser();
   }
 }

@@ -18,7 +18,8 @@ import '../../features/auth/data/datasources/remote/auth_datasource.dart'
     as _i7;
 import '../../features/auth/data/repository/auth_repository_impl.dart' as _i9;
 import '../../features/auth/domain/repositories/auth_repository.dart' as _i8;
-import '../../features/auth/domain/usecases/get_token_use_case.dart' as _i10;
+import '../../features/auth/domain/usecases/get_current_user_use_case.dart'
+    as _i10;
 import '../../features/auth/domain/usecases/login_use_case.dart' as _i11;
 import '../../features/auth/domain/usecases/logout_use_case.dart' as _i12;
 import '../../features/auth/presentation/cubit/auth_cubit/auth_cubit.dart'
@@ -55,15 +56,15 @@ Future<_i1.GetIt> $initGetIt(
         get<_i7.AuthRemoteDatasource>(),
         get<_i6.AuthLocalDatasource>(),
       ));
-  gh.factory<_i10.GetTokenUseCase>(
-      () => _i10.GetTokenUseCase(get<_i8.AuthRepository>()));
+  gh.factory<_i10.GetCurrentUserUseCase>(
+      () => _i10.GetCurrentUserUseCase(get<_i8.AuthRepository>()));
   gh.factory<_i11.LoginUseCase>(
       () => _i11.LoginUseCase(get<_i8.AuthRepository>()));
   gh.factory<_i12.LogoutUseCase>(
       () => _i12.LogoutUseCase(get<_i8.AuthRepository>()));
   gh.factory<_i13.AuthCubit>(() => _i13.AuthCubit(
         get<_i11.LoginUseCase>(),
-        get<_i10.GetTokenUseCase>(),
+        get<_i10.GetCurrentUserUseCase>(),
         get<_i12.LogoutUseCase>(),
       ));
   return get;

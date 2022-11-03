@@ -1,7 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery/core/utils/app_strings.dart';
-import 'package:gallery/features/auth/domain/usecases/get_token_use_case.dart';
+import 'package:gallery/features/auth/domain/entities/user.dart';
+import 'package:gallery/features/auth/domain/usecases/get_current_user_use_case.dart';
 import 'package:gallery/features/auth/domain/usecases/login_use_case.dart';
 import 'package:gallery/features/auth/domain/usecases/logout_use_case.dart';
 import 'package:gallery/features/auth/presentation/cubit/auth_cubit/auth_states.dart';
@@ -11,13 +12,13 @@ import 'package:injectable/injectable.dart';
 class AuthCubit extends Cubit<AuthStates> {
   AuthCubit(
     this._loginUseCase,
-    this._getTokenUseCase,
+    this._getCurrentUserUseCase,
     this._logoutUseCase,
   ) : super(const AuthStates.initial());
 
   final LoginUseCase _loginUseCase;
   final LogoutUseCase _logoutUseCase;
-  final GetTokenUseCase _getTokenUseCase;
+  final GetCurrentUserUseCase _getCurrentUserUseCase;
 
   Future<void> login({required LoginParam loginParam}) async {
     emit(const AuthStates.loading());
@@ -51,5 +52,6 @@ class AuthCubit extends Cubit<AuthStates> {
     return null;
   }
 
-  String? get token => _getTokenUseCase();
+  User? get currentUser => _getCurrentUserUseCase();
+
 }

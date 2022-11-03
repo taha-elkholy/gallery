@@ -1,13 +1,16 @@
+import 'dart:convert';
+
 import 'package:gallery/core/utils/app_strings.dart';
+import 'package:gallery/features/auth/data/models/user/user_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AuthLocalDatasource {
-  Future<bool> saveToken({required String token});
+  Future<bool> saveCurrentUser({required UserModel currentUser});
 
-  String? getToken();
+  UserModel? getCurrentUser();
 
-  Future<bool> deleteToken();
+  Future<bool> deleteCurrentUser();
 }
 
 @Singleton(as: AuthLocalDatasource)
@@ -17,18 +20,24 @@ class AuthLocalDatasourceImpl extends AuthLocalDatasource {
   AuthLocalDatasourceImpl(this._preferences);
 
   @override
-  Future<bool> deleteToken() async {
-    return await _preferences.remove(AppStrings.tokenKey);
+  Future<bool> deleteCurrentUser() async {
+    return await _preferences.remove(AppStrings.currentUserKey);
   }
 
   @override
-  String? getToken() {
-    return _preferences.getString(AppStrings.tokenKey);
+  UserModel? getCurrentUser() {
+    final userString = _preferences.getString(AppStrings.currentUserKey);
+    if (userString != null) {
+      final jsonUser = json.decode(userString);
+      return UserModel.fromJson(jsonUser);
+    }
+    return null;
   }
 
   @override
-  Future<bool> saveToken({required String token}) async {
+  Future<bool> saveCurrentUser({required UserModel currentUser}) async {
+    final userString = currentUser.toJson();
     return await _preferences.setString(
-        AppStrings.tokenKey, token);
+        AppStrings.currentUserKey, json.encode(userString));
   }
 }

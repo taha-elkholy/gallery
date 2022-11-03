@@ -8,10 +8,14 @@ class AppStrings {
   static const String submit = 'Submit';
   static const String emailValidation = 'In Valid Email';
   static const String passwordValidation = 'Password Required';
+  static const String ok = 'Ok';
 
+  static String welcomeText(String name) => 'Welcome\n$name';
+  static const String logout = 'Logout';
+  static const String upload = 'Upload';
 
   /// shared preferences
-  static const String tokenKey = 'TOKEN_KEY';
+  static const String currentUserKey = 'CURRENT_USER_KEY';
 
   /// headers
   static const String accept = 'Accept';
@@ -28,6 +32,4 @@ class AppStrings {
   static const String inCorrectInputsErrorMessage =
       'Email or Password not correct';
   static const String notFoundErrorMessage = 'The Required Data Not Found';
-
-
 }
