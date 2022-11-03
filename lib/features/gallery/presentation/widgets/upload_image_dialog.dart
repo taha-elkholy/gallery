@@ -11,7 +11,7 @@ class UploadImageDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: AppColors.white.withOpacity(0.4),
+      backgroundColor: AppColors.white.withOpacity(0.5),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.r),
       ),
@@ -22,6 +22,7 @@ class UploadImageDialog extends StatelessWidget {
           _DialogButton(
             label: AppStrings.gallery,
             iconPath: ImageAssets.galleryIcon,
+            color: AppColors.dialogButtonColor,
             onPressed: () {},
           ),
           SizedBox(
@@ -43,11 +44,14 @@ class _DialogButton extends StatelessWidget {
       {Key? key,
       required this.label,
       required this.iconPath,
-      required this.onPressed})
+      required this.onPressed,
+      this.color})
       : super(key: key);
+
   final String label;
   final String iconPath;
   final VoidCallback onPressed;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +59,7 @@ class _DialogButton extends StatelessWidget {
       label: label,
       height: 65.w,
       iconWidth: 48.w,
-      color: AppColors.dialogButtonColor,
+      color: color ?? AppColors.white,
       iconPath: iconPath,
       onPressed: onPressed,
     );

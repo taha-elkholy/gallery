@@ -24,7 +24,7 @@ class GalleryBody extends StatelessWidget {
           SizedBox(
             height: 20.h,
           ),
-          const UserName(),
+          const UserProfile(),
           SizedBox(
             height: 20.h,
           ),
@@ -49,6 +49,7 @@ class GalleryBody extends StatelessWidget {
                     showDialog(
                       context: context,
                       barrierDismissible: true,
+                      barrierColor: Colors.transparent,
                       builder: (BuildContext context) =>
                           const UploadImageDialog(),
                     );
