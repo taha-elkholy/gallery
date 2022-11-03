@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gallery/config/routes/app_routes.dart';
 import 'package:gallery/core/presentation/widgets/page_with_background.dart';
 import 'package:gallery/core/utils/assets_manager.dart';
 import 'package:gallery/features/auth/presentation/cubit/auth_cubit/auth_cubit.dart';
@@ -14,8 +15,8 @@ class GalleryPage extends StatelessWidget {
     return BlocListener<AuthCubit, AuthStates>(
       listener: (context, state) {
         state.whenOrNull(
-            logout: () =>
-                Navigator.popUntil(context, (route) => route.isFirst));
+            logout: () => Navigator.pushReplacementNamed(
+                context, AppRoutes.initialPageRoute),);
       },
       child: const PageWithBackground(
         backgroundAssetName: ImageAssets.galleryBg,

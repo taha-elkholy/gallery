@@ -14,6 +14,7 @@ class PageWithBackground extends StatelessWidget {
         leading: const SizedBox.shrink(),
       ),
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Image.asset(

@@ -22,29 +22,22 @@ class _Mobil extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return ListView(
       physics: const BouncingScrollPhysics(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            height: context.height * 0.2,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: context.width * 0.1),
-            child: Text(
-              AppStrings.myGallery,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-          SizedBox(
-            height: 40.h,
-          ),
-          const LoginForm(),
-        ],
-      ),
+      children: [
+        SizedBox(
+          height: 100.h,
+        ),
+        Text(
+          AppStrings.myGallery,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        SizedBox(
+          height: 24.h,
+        ),
+        const LoginForm(),
+      ],
     );
   }
 }

@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gallery/core/utils/app_colors.dart';
 import 'package:gallery/core/utils/app_strings.dart';
 import 'package:gallery/core/utils/assets_manager.dart';
 import 'package:gallery/features/gallery/presentation/widgets/custom_icon_text_button.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UploadImageDialog extends StatelessWidget {
   const UploadImageDialog({Key? key}) : super(key: key);
@@ -23,7 +26,9 @@ class UploadImageDialog extends StatelessWidget {
             label: AppStrings.gallery,
             iconPath: ImageAssets.galleryIcon,
             color: AppColors.dialogButtonColor,
-            onPressed: () {},
+            onPressed: () async{
+              final pickedImage = await pickImage(source: ImageSource.gallery);
+            },
           ),
           SizedBox(
             height: 20.h,
@@ -31,21 +36,33 @@ class UploadImageDialog extends StatelessWidget {
           _DialogButton(
             label: AppStrings.camera,
             iconPath: ImageAssets.cameraIcon,
-            onPressed: () {},
+            onPressed: ()  async{
+              final pickedImage = await pickImage(source: ImageSource.camera);
+            },
           ),
         ],
       ),
     );
   }
+
+
+  Future<File?> pickImage({required ImageSource source}) async {
+    // Pick image
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(source: source);
+    if (pickedFile != null) {
+      return File(pickedFile.path);
+    }
+    return null;
+  }
 }
 
 class _DialogButton extends StatelessWidget {
-  const _DialogButton(
-      {Key? key,
-      required this.label,
-      required this.iconPath,
-      required this.onPressed,
-      this.color})
+  const _DialogButton({Key? key,
+    required this.label,
+    required this.iconPath,
+    required this.onPressed,
+    this.color})
       : super(key: key);
 
   final String label;
