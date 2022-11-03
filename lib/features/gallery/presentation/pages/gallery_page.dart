@@ -15,8 +15,9 @@ class GalleryPage extends StatelessWidget {
     return BlocListener<AuthCubit, AuthStates>(
       listener: (context, state) {
         state.whenOrNull(
-            logout: () => Navigator.pushReplacementNamed(
-                context, AppRoutes.initialPageRoute),);
+          logout: () => Navigator.pushReplacementNamed(
+              context, AppRoutes.initialPageRoute),
+        );
       },
       child: const PageWithBackground(
         backgroundAssetName: ImageAssets.galleryBg,

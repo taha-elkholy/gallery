@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gallery/core/utils/app_strings.dart';
 import 'package:gallery/core/utils/media_query_values.dart';
 import 'package:gallery/features/gallery/presentation/widgets/image_grid_item.dart';
 
@@ -10,9 +12,18 @@ class ImagesGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (images.isEmpty) {
+      return Center(
+        child: Text(
+          AppStrings.noImages,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      );
+    }
     return GridView.builder(
-      physics: const BouncingScrollPhysics(),
       padding: EdgeInsets.zero,
+      primary: false,
+      shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: context.tabletSize ? 6 : 3,
         childAspectRatio: 1,

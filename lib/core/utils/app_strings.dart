@@ -9,7 +9,10 @@ class AppStrings {
   static const String emailValidation = 'In Valid Email';
   static const String passwordValidation = 'Password Required';
   static const String ok = 'Ok';
+  static const String cancel = 'Cancel';
   static const String fontFamily = 'Changa';
+  static const String noImagePicked = 'You do not select any Image';
+  static const String noImages = 'No Images in your account\nUpload Now...';
 
   static String welcomeText(String name) => 'Welcome\n$name';
   static const String logout = 'Logout';
@@ -19,6 +22,7 @@ class AppStrings {
 
   /// shared preferences
   static const String currentUserKey = 'CURRENT_USER_KEY';
+  static const String cachedGalleryKey = 'GALLERY_KEY';
 
   /// headers
   static const String accept = 'Accept';

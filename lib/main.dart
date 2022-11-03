@@ -7,6 +7,7 @@ import 'package:gallery/config/routes/app_routes.dart';
 import 'package:gallery/config/themes/app_theme.dart';
 import 'package:gallery/core/utils/app_strings.dart';
 import 'package:gallery/features/auth/presentation/cubit/auth_cubit/auth_cubit.dart';
+import 'package:gallery/features/gallery/presentation/cubit/gallery_cubit/gallery_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,8 +20,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<AuthCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<AuthCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<GalleryCubit>(),
+        ),
+      ],
       child: ScreenUtilInit(
           designSize: const Size(360, 690),
           minTextAdapt: true,

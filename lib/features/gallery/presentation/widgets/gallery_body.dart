@@ -1,16 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gallery/core/utils/app_colors.dart';
 import 'package:gallery/core/utils/app_strings.dart';
 import 'package:gallery/core/utils/assets_manager.dart';
 import 'package:gallery/features/auth/presentation/cubit/auth_cubit/auth_cubit.dart';
+import 'package:gallery/features/gallery/presentation/cubit/gallery_cubit/gallery_cubit.dart';
+import 'package:gallery/features/gallery/presentation/cubit/gallery_cubit/gallery_states.dart';
 import 'package:gallery/features/gallery/presentation/widgets/custom_icon_text_button.dart';
 import 'package:gallery/features/gallery/presentation/widgets/images_grid_view.dart';
 import 'package:gallery/features/gallery/presentation/widgets/upload_image_dialog.dart';
 import 'package:gallery/features/gallery/presentation/widgets/user_name.dart';
 
-class GalleryBody extends StatelessWidget {
+class GalleryBody extends StatefulWidget {
   const GalleryBody({Key? key}) : super(key: key);
+
+  @override
+  State<GalleryBody> createState() => _GalleryBodyState();
+}
+
+class _GalleryBodyState extends State<GalleryBody> {
+  //late final String token;
+
+  @override
+  void initState() {
+    super.initState();
+    //token = context.read<AuthCubit>().currentUser!.token;
+    //print('Token From Body $token');
+    //context.read<GalleryCubit>().getGallery(token: token);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,20 +80,37 @@ class GalleryBody extends StatelessWidget {
             height: 20.h,
           ),
           Expanded(
-              child: ImagesGridView(images: [
-            'https://media.isto8484ckphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
-            'https://media.istockphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
-            'https://media.istockphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
-            'https://media.istock256'
-                'photo.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
-            'https://media.istockphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
-            'https://media.istockphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
-            'https://media.istockphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
-            'https://media.istockphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
-            'https://media.istockphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
-            'https://media.istockphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
-            'https://media.istockphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
-          ]))
+            child: BlocBuilder<GalleryCubit, GalleryStates>(
+              buildWhen: (previous, current) =>
+                  current is! GalleryFilePickedState ||
+                  current is! GalleryUploadedState,
+              builder: (context, state) {
+                return state.maybeWhen(
+                    loaded: (gallery) => RefreshIndicator(
+                          onRefresh: () => context
+                              .read<GalleryCubit>()
+                              .getGallery(token: 'token'),
+                          child: ListView(
+                            physics: const BouncingScrollPhysics(),
+                            padding: EdgeInsets.zero,
+                            children: [ImagesGridView(images: gallery.images)],
+                          ),
+                        ),
+                    loading: () => Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.white,
+                          ),
+                        ),
+                    error: (errorMessage) => Center(
+                          child: Text(
+                            errorMessage,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ),
+                    orElse: SizedBox.shrink);
+              },
+            ),
+          ),
         ],
       ),
     );

@@ -10,7 +10,7 @@ class ImageGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // todo open in other view
+        // todo open in other view if i have time
       },
       child: AppNetworkImage(
         url: imageUrl,

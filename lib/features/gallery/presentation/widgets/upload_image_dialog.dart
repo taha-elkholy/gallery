@@ -1,10 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gallery/core/utils/app_colors.dart';
 import 'package:gallery/core/utils/app_strings.dart';
 import 'package:gallery/core/utils/assets_manager.dart';
+import 'package:gallery/features/gallery/domain/usecases/upload_image_use_case.dart';
+import 'package:gallery/features/gallery/presentation/cubit/gallery_cubit/gallery_cubit.dart';
 import 'package:gallery/features/gallery/presentation/widgets/custom_icon_text_button.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -19,6 +20,41 @@ class UploadImageDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.r),
       ),
       contentPadding: EdgeInsets.all(30.w),
+      actionsAlignment: MainAxisAlignment.spaceEvenly,
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+            final imageFile = context.read<GalleryCubit>().imageFile;
+            if (imageFile != null) {
+              //final String token = context.read<AuthCubit>().currentUser!.token;
+              final UploadImageParam param = UploadImageParam(
+                token: 'token',
+                image: imageFile,
+              );
+
+              context.read<GalleryCubit>().uploadImage(uploadImageParam: param);
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text(AppStrings.noImagePicked)));
+            }
+          },
+          child: Text(
+            AppStrings.ok,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            context.read<GalleryCubit>().imageFile = null;
+            Navigator.pop(context);
+          },
+          child: Text(
+            AppStrings.cancel,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        )
+      ],
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -26,8 +62,10 @@ class UploadImageDialog extends StatelessWidget {
             label: AppStrings.gallery,
             iconPath: ImageAssets.galleryIcon,
             color: AppColors.dialogButtonColor,
-            onPressed: () async{
-              final pickedImage = await pickImage(source: ImageSource.gallery);
+            onPressed: () async {
+              await context
+                  .read<GalleryCubit>()
+                  .pickImage(source: ImageSource.gallery);
             },
           ),
           SizedBox(
@@ -36,33 +74,25 @@ class UploadImageDialog extends StatelessWidget {
           _DialogButton(
             label: AppStrings.camera,
             iconPath: ImageAssets.cameraIcon,
-            onPressed: ()  async{
-              final pickedImage = await pickImage(source: ImageSource.camera);
+            onPressed: () async {
+              await context
+                  .read<GalleryCubit>()
+                  .pickImage(source: ImageSource.camera);
             },
           ),
         ],
       ),
     );
   }
-
-
-  Future<File?> pickImage({required ImageSource source}) async {
-    // Pick image
-    final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile = await picker.pickImage(source: source);
-    if (pickedFile != null) {
-      return File(pickedFile.path);
-    }
-    return null;
-  }
 }
 
 class _DialogButton extends StatelessWidget {
-  const _DialogButton({Key? key,
-    required this.label,
-    required this.iconPath,
-    required this.onPressed,
-    this.color})
+  const _DialogButton(
+      {Key? key,
+      required this.label,
+      required this.iconPath,
+      required this.onPressed,
+      this.color})
       : super(key: key);
 
   final String label;
