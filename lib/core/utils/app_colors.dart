@@ -6,4 +6,5 @@ class AppColors {
   static Color lightWhite = const Color(0xffF7F7F7);
   static Color grey = const Color(0xff9D9491);
   static Color blue = const Color(0xff7BB3FF);
+  static Color dialogButtonColor = const Color(0xffEFD8F9);
 }

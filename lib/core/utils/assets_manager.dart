@@ -7,4 +7,6 @@ class ImageAssets {
   static const String placeholder = '$_imagePath/placeholder.png';
   static const String logoutIcon = '$_iconPath/logout.png';
   static const String uploadIcon = '$_iconPath/upload.png';
+  static const String cameraIcon = '$_iconPath/camera.png';
+  static const String galleryIcon = '$_iconPath/gallery.png';
 }

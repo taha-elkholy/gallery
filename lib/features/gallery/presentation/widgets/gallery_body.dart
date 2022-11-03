@@ -6,6 +6,7 @@ import 'package:gallery/core/utils/assets_manager.dart';
 import 'package:gallery/features/auth/presentation/cubit/auth_cubit/auth_cubit.dart';
 import 'package:gallery/features/gallery/presentation/widgets/custom_icon_text_button.dart';
 import 'package:gallery/features/gallery/presentation/widgets/images_grid_view.dart';
+import 'package:gallery/features/gallery/presentation/widgets/upload_image_dialog.dart';
 import 'package:gallery/features/gallery/presentation/widgets/user_name.dart';
 
 class GalleryBody extends StatelessWidget {
@@ -44,7 +45,14 @@ class GalleryBody extends StatelessWidget {
                 CustomIconTextButton(
                   label: AppStrings.upload,
                   iconPath: ImageAssets.uploadIcon,
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (BuildContext context) =>
+                          const UploadImageDialog(),
+                    );
+                  },
                 ),
               ],
             ),
@@ -53,8 +61,7 @@ class GalleryBody extends StatelessWidget {
             height: 20.h,
           ),
           Expanded(
-              child: ImagesGridView(
-                  images: [
+              child: ImagesGridView(images: [
             'https://media.isto8484ckphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
             'https://media.istockphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',
             'https://media.istockphoto.com/photos/surface-of-blue-swimming-pool-picture-id1161207694',

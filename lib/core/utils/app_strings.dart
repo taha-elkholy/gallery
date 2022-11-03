@@ -9,10 +9,13 @@ class AppStrings {
   static const String emailValidation = 'In Valid Email';
   static const String passwordValidation = 'Password Required';
   static const String ok = 'Ok';
+  static const String fontFamily = 'Changa';
 
   static String welcomeText(String name) => 'Welcome\n$name';
   static const String logout = 'Logout';
   static const String upload = 'Upload';
+  static const String gallery = 'Gallery';
+  static const String camera = 'Camera';
 
   /// shared preferences
   static const String currentUserKey = 'CURRENT_USER_KEY';
