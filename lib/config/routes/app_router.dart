@@ -12,7 +12,7 @@ class AppRouter {
           builder: (_) => const LoginPage(),
           settings: settings,
         );
-        case AppRoutes.galleryPageRoute:
+      case AppRoutes.galleryPageRoute:
         return MaterialPageRoute(
           builder: (_) => const GalleryPage(),
           settings: settings,

@@ -11,7 +11,8 @@ class CustomIconTextButton extends StatelessWidget {
       required this.onPressed,
       this.color,
       this.width,
-      this.height, this.iconWidth})
+      this.height,
+      this.iconWidth})
       : super(key: key);
   final String label;
   final String iconPath;

@@ -53,5 +53,4 @@ class AuthCubit extends Cubit<AuthStates> {
   }
 
   User? get currentUser => _getCurrentUserUseCase();
-
 }

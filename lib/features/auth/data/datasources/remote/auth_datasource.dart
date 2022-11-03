@@ -4,7 +4,7 @@ import 'package:gallery/features/auth/data/models/login/login_model.dart';
 import 'package:gallery/features/auth/data/models/user/user_model.dart';
 import 'package:injectable/injectable.dart';
 
-abstract class AuthRemoteDatasource{
+abstract class AuthRemoteDatasource {
   Future<UserModel> login({required LoginModel loginModel});
 }
 
@@ -16,7 +16,6 @@ class AuthRemoteDatasourceImpl extends AuthRemoteDatasource {
 
   @override
   Future<UserModel> login({required LoginModel loginModel}) async {
-
     try {
       return await _authApiService.login(loginModel: loginModel);
     } catch (e) {
