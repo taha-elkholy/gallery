@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:gallery/core/error/exceptions.dart';
 import 'package:gallery/core/error/failure.dart';
@@ -7,7 +9,6 @@ import 'package:gallery/features/gallery/data/datasources/remote/gallery_remote_
 import 'package:gallery/features/gallery/data/mappers/gallery_mapper.dart';
 import 'package:gallery/features/gallery/domain/entities/gallery.dart';
 import 'package:gallery/features/gallery/domain/repositories/gallery_repository.dart';
-import 'package:gallery/features/gallery/domain/usecases/upload_image_use_case.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: GalleryRepository)
@@ -18,10 +19,9 @@ class GalleryRepositoryImpl implements GalleryRepository {
   GalleryRepositoryImpl(this._remoteDatasource, this._localDatasource);
 
   @override
-  Future<Either<AppFailure, Gallery>> getGallery(
-      {required String token}) async {
+  Future<Either<AppFailure, Gallery>> getGallery() async {
     try {
-      final galleryModel = await _remoteDatasource.getGallery(token: token);
+      final galleryModel = await _remoteDatasource.getGallery();
 
       await _localDatasource.saveGallery(
         galleryModel: galleryModel,
@@ -40,11 +40,10 @@ class GalleryRepositoryImpl implements GalleryRepository {
   }
 
   @override
-  Future<Either<AppFailure, Unit>> uploadImage(
-      {required UploadImageParam uploadImageParam}) async {
+  Future<Either<AppFailure, Unit>> uploadImage({required File image}) async {
     try {
       await _remoteDatasource.uploadImage(
-        uploadImageParam: uploadImageParam,
+        image: image,
       );
 
       return right(unit);

@@ -25,7 +25,7 @@ class ImagesGridView extends StatelessWidget {
       primary: false,
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: context.tabletSize ? 6 : 3,
+        crossAxisCount: context.tabletSize ? 5 : 3,
         childAspectRatio: 1,
         mainAxisSpacing: 16.w,
         crossAxisSpacing: 16.w,

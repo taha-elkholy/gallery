@@ -7,20 +7,13 @@ import 'package:gallery/features/gallery/domain/repositories/gallery_repository.
 import 'package:injectable/injectable.dart';
 
 @injectable
-class UploadImageUseCase implements UseCase<Unit, UploadImageParam> {
+class UploadImageUseCase implements UseCase<Unit, File> {
   final GalleryRepository _galleryRepository;
 
   UploadImageUseCase(this._galleryRepository);
 
   @override
-  Future<Either<AppFailure, Unit>> call(UploadImageParam param) {
-    return _galleryRepository.uploadImage(uploadImageParam: param);
+  Future<Either<AppFailure, Unit>> call(File param) {
+    return _galleryRepository.uploadImage(image: param);
   }
-}
-
-class UploadImageParam {
-  final String token;
-  final File image;
-
-  const UploadImageParam({required this.token, required this.image});
 }

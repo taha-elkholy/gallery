@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gallery/core/utils/app_colors.dart';
 import 'package:gallery/core/utils/app_strings.dart';
 import 'package:gallery/core/utils/assets_manager.dart';
-import 'package:gallery/features/gallery/domain/usecases/upload_image_use_case.dart';
 import 'package:gallery/features/gallery/presentation/cubit/gallery_cubit/gallery_cubit.dart';
 import 'package:gallery/features/gallery/presentation/widgets/custom_icon_text_button.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,16 +26,13 @@ class UploadImageDialog extends StatelessWidget {
             Navigator.pop(context);
             final imageFile = context.read<GalleryCubit>().imageFile;
             if (imageFile != null) {
-              //final String token = context.read<AuthCubit>().currentUser!.token;
-              final UploadImageParam param = UploadImageParam(
-                token: 'token',
-                image: imageFile,
-              );
-
-              context.read<GalleryCubit>().uploadImage(uploadImageParam: param);
+              context.read<GalleryCubit>().uploadImage(image: imageFile);
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text(AppStrings.noImagePicked)));
+                const SnackBar(
+                  content: Text(AppStrings.noImagePicked),
+                ),
+              );
             }
           },
           child: Text(
@@ -65,7 +61,7 @@ class UploadImageDialog extends StatelessWidget {
             onPressed: () async {
               await context
                   .read<GalleryCubit>()
-                  .pickImage(source: ImageSource.gallery);
+                  .pickMyImage(source: ImageSource.gallery);
             },
           ),
           SizedBox(
@@ -77,7 +73,7 @@ class UploadImageDialog extends StatelessWidget {
             onPressed: () async {
               await context
                   .read<GalleryCubit>()
-                  .pickImage(source: ImageSource.camera);
+                  .pickMyImage(source: ImageSource.camera);
             },
           ),
         ],

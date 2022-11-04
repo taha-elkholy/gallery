@@ -29,7 +29,7 @@ class AuthRepositoryImpl implements AuthRepository {
         currentUser: userModel,
       );
 
-      return right(userModel.fromModel);
+      return right(userModel.user.fromModel);
     } on AppException catch (appException) {
       return left(returnAppFailure(appException));
     }
@@ -39,7 +39,7 @@ class AuthRepositoryImpl implements AuthRepository {
   User? getCurrentUser() {
     final cachedCurrentUser = _authLocalDatasource.getCurrentUser();
     if (cachedCurrentUser != null) {
-      return cachedCurrentUser.fromModel;
+      return cachedCurrentUser.user.fromModel;
     }
     return null;
   }

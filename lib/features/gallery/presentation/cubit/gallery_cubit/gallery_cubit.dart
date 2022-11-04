@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gallery/core/usecase/usecase.dart';
 import 'package:gallery/features/gallery/domain/usecases/get_gallery_use_case.dart';
 import 'package:gallery/features/gallery/domain/usecases/upload_image_use_case.dart';
 import 'package:gallery/features/gallery/presentation/cubit/gallery_cubit/gallery_states.dart';
@@ -17,9 +18,9 @@ class GalleryCubit extends Cubit<GalleryStates> {
   final GetGalleryUseCase _getGalleryUseCase;
   final UploadImageUseCase _uploadImageUseCase;
 
-  Future<void> uploadImage({required UploadImageParam uploadImageParam}) async {
+  Future<void> uploadImage({required File image}) async {
     emit(const GalleryStates.loading());
-    final result = await _uploadImageUseCase(uploadImageParam);
+    final result = await _uploadImageUseCase(image);
     emit(
       result.fold(
         (failure) => GalleryStates.error(
@@ -30,9 +31,9 @@ class GalleryCubit extends Cubit<GalleryStates> {
     );
   }
 
-  Future<void> getGallery({required String token}) async {
+  Future<void> getGallery() async {
     emit(const GalleryStates.loading());
-    final result = await _getGalleryUseCase(token);
+    final result = await _getGalleryUseCase(NoParam());
     emit(
       result.fold(
         (failure) => GalleryStates.error(
@@ -45,7 +46,7 @@ class GalleryCubit extends Cubit<GalleryStates> {
 
   File? imageFile;
 
-  Future<void> pickImage({required ImageSource source}) async {
+  Future<void> pickMyImage({required ImageSource source}) async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile = await picker.pickImage(source: source);
     if (pickedFile != null) {

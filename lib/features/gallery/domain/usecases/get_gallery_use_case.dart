@@ -6,13 +6,13 @@ import 'package:gallery/features/gallery/domain/repositories/gallery_repository.
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetGalleryUseCase implements UseCase<Gallery, String> {
+class GetGalleryUseCase implements UseCase<Gallery, NoParam> {
   final GalleryRepository _galleryRepository;
 
   GetGalleryUseCase(this._galleryRepository);
 
   @override
-  Future<Either<AppFailure, Gallery>> call(String param) {
-    return _galleryRepository.getGallery(token: param);
+  Future<Either<AppFailure, Gallery>> call(NoParam param) {
+    return _galleryRepository.getGallery();
   }
 }

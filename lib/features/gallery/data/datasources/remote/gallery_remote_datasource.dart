@@ -1,15 +1,15 @@
+import 'dart:io';
+
 import 'package:gallery/core/error/throw_app_exception.dart';
-import 'package:gallery/core/utils/app_strings.dart';
 import 'package:gallery/features/gallery/data/models/gallery/gallery_model.dart';
-import 'package:gallery/features/gallery/domain/usecases/upload_image_use_case.dart';
 import 'package:injectable/injectable.dart';
 
 import 'gallery_api_service.dart';
 
 abstract class GalleryRemoteDatasource {
-  Future<GalleryModel> getGallery({required String token});
+  Future<GalleryModel> getGallery();
 
-  Future<void> uploadImage({required UploadImageParam uploadImageParam});
+  Future<void> uploadImage({required File image});
 }
 
 @Injectable(as: GalleryRemoteDatasource)
@@ -19,21 +19,19 @@ class GalleryRemoteDatasourceImpl extends GalleryRemoteDatasource {
   GalleryRemoteDatasourceImpl(this._galleryApiService);
 
   @override
-  Future<GalleryModel> getGallery({required String token}) async {
+  Future<GalleryModel> getGallery() async {
     try {
-      return await _galleryApiService.getGallery(
-          token: '${AppStrings.bearer} $token');
+      return await _galleryApiService.getGallery();
     } catch (e) {
       throw throwAppException(e);
     }
   }
 
   @override
-  Future<void> uploadImage({required UploadImageParam uploadImageParam}) async {
+  Future<void> uploadImage({required File image}) async {
     try {
       return await _galleryApiService.uploadImage(
-        token: '${AppStrings.bearer} ${uploadImageParam.token}',
-        image: uploadImageParam.image,
+        image: image,
       );
     } catch (e) {
       throw throwAppException(e);

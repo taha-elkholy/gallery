@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gallery/core/utils/app_colors.dart';
 import 'package:gallery/core/utils/app_strings.dart';
 import 'package:gallery/core/utils/assets_manager.dart';
 import 'package:gallery/features/auth/presentation/cubit/auth_cubit/auth_cubit.dart';
@@ -20,14 +19,10 @@ class GalleryBody extends StatefulWidget {
 }
 
 class _GalleryBodyState extends State<GalleryBody> {
-  //late final String token;
-
   @override
   void initState() {
     super.initState();
-    //token = context.read<AuthCubit>().currentUser!.token;
-    //print('Token From Body $token');
-    //context.read<GalleryCubit>().getGallery(token: token);
+    context.read<GalleryCubit>().getGallery();
   }
 
   @override
@@ -86,28 +81,27 @@ class _GalleryBodyState extends State<GalleryBody> {
                   current is! GalleryUploadedState,
               builder: (context, state) {
                 return state.maybeWhen(
-                    loaded: (gallery) => RefreshIndicator(
-                          onRefresh: () => context
-                              .read<GalleryCubit>()
-                              .getGallery(token: 'token'),
-                          child: ListView(
-                            physics: const BouncingScrollPhysics(),
-                            padding: EdgeInsets.zero,
-                            children: [ImagesGridView(images: gallery.images)],
-                          ),
-                        ),
-                    loading: () => Center(
-                          child: CircularProgressIndicator(
-                            color: AppColors.white,
-                          ),
-                        ),
-                    error: (errorMessage) => Center(
-                          child: Text(
-                            errorMessage,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        ),
-                    orElse: SizedBox.shrink);
+                  loaded: (gallery) => RefreshIndicator(
+                    onRefresh: () => context.read<GalleryCubit>().getGallery(),
+                    child: ListView(
+                      physics: const BouncingScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      children: [
+                        ImagesGridView(images: gallery.images.reversed.toList())
+                      ],
+                    ),
+                  ),
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  error: (errorMessage) => Center(
+                    child: Text(
+                      errorMessage,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ),
+                  orElse: () => const SizedBox.shrink(),
+                );
               },
             ),
           ),

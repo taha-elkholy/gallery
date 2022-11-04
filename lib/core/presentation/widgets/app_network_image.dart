@@ -18,6 +18,7 @@ class AppNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: EdgeInsets.zero,
       child: CachedNetworkImage(
         fit: BoxFit.cover,
         imageUrl: url,

@@ -36,7 +36,7 @@ class AuthLocalDatasourceImpl extends AuthLocalDatasource {
 
   @override
   Future<bool> saveCurrentUser({required UserModel currentUser}) async {
-    final userString = currentUser.toJson();
+    final userString = currentUser;
     return await _preferences.setString(
         AppStrings.currentUserKey, json.encode(userString));
   }

@@ -25,8 +25,8 @@ class _LoginFormState extends State<LoginForm> {
   void initState() {
     super.initState();
     _formKey = GlobalKey<FormState>();
-    _userNameController = TextEditingController(text: 'slynch@example.org');
-    _passwordController = TextEditingController(text: 'password');
+    _userNameController = TextEditingController();
+    _passwordController = TextEditingController();
   }
 
   @override

@@ -21,11 +21,10 @@ class _GalleryApiService implements GalleryApiService {
   String? baseUrl;
 
   @override
-  Future<GalleryModel> getGallery({required token}) async {
+  Future<GalleryModel> getGallery() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<GalleryModel>(Options(
@@ -45,17 +44,13 @@ class _GalleryApiService implements GalleryApiService {
   }
 
   @override
-  Future<void> uploadImage({
-    required token,
-    required image,
-  }) async {
+  Future<void> uploadImage({required image}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': token};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.files.add(MapEntry(
-      'image',
+      'img',
       MultipartFile.fromFileSync(
         image.path,
         filename: image.path.split(Platform.pathSeparator).last,
@@ -65,6 +60,7 @@ class _GalleryApiService implements GalleryApiService {
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: 'multipart/form-data',
     )
         .compose(
           _dio.options,

@@ -31,6 +31,6 @@ class GalleryLocalDatasourceImpl extends GalleryLocalDatasource {
   Future<bool> saveGallery({required GalleryModel galleryModel}) async {
     final galleryString = galleryModel.toJson();
     return await _preferences.setString(
-        AppStrings.currentUserKey, json.encode(galleryString));
+        AppStrings.cachedGalleryKey, json.encode(galleryString));
   }
 }

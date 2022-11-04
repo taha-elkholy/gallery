@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gallery/core/utils/media_query_values.dart';
 
 class PageWithBackground extends StatelessWidget {
   const PageWithBackground(
@@ -16,6 +17,9 @@ class PageWithBackground extends StatelessWidget {
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
       body: Stack(
+        alignment: context.tabletSize
+            ? Alignment.center
+            : AlignmentDirectional.topStart,
         children: [
           Image.asset(
             backgroundAssetName,

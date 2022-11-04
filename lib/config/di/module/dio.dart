@@ -1,11 +1,15 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:gallery/config/di/injectable.dart';
 import 'package:gallery/core/api/end_points.dart';
 import 'package:gallery/core/network/network_info.dart';
 import 'package:gallery/core/utils/app_strings.dart';
+import 'package:gallery/features/auth/data/models/user/user_model.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @module
 abstract class AppDioInject {
@@ -17,6 +21,20 @@ abstract class AppDioInject {
 }
 
 class AppInterceptor extends Interceptor {
+  String? get token => _getToken();
+
+  String? _getToken() {
+    final userModelString =
+        getIt<SharedPreferences>().getString(AppStrings.currentUserKey);
+    if (userModelString != null) {
+      final UserModel userModel = UserModel.fromJson(
+        jsonDecode(userModelString),
+      );
+      return userModel.token;
+    }
+    return null;
+  }
+
   @override
   void onRequest(
     RequestOptions options,
@@ -24,6 +42,7 @@ class AppInterceptor extends Interceptor {
   ) async {
     final connection = await NetworkInfo().isConnected;
 
+    debugPrint('AppInterceptor=> token:$token');
     debugPrint('AppInterceptor=> request path is:${options.path}');
 
     if (connection) {
@@ -42,6 +61,7 @@ class AppInterceptor extends Interceptor {
       options.headers.addAll(
         {
           AppStrings.accept: AppStrings.applicationJson,
+          AppStrings.authorization: '${AppStrings.bearer} $token'
         },
       );
 
